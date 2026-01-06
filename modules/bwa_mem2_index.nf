@@ -1,19 +1,19 @@
 /**
- * Process to run bwa index on samples.
+ * Process to run bwa-mem2 index on samples.
  * 
  * Indexes the reference genome to prepare for sample alignment.
- * @see https://bio-bwa.sourceforge.net/bwa.shtml
+ * @see https://github.com/bwa-mem2/bwa-mem2
  * 
  * @input reference - File path to the reference genome and associated indexed files 
  * @emit  referenceFiles - Channel consisting of [ [ reference, index1, index2, index3, index4, index5 ] ]
  */
 
- process bwa_index {
+ process bwa_mem2_index {
     
-    label 'bwa'
+    label 'bwa_mem2'
 
     label 'big_cpu'
-    label 'big_mem'
+    label 'max_mem'
     label 'def_time'
 
     publishDir(
@@ -29,7 +29,7 @@
 
     script:
         """
-        bwa index \
+        bwa-mem2 index \
         ${reference}
         """
  }

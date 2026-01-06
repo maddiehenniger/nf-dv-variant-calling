@@ -1,4 +1,4 @@
-include { bwa_index } from '../modules/bwa_index.nf'
+include { bwa_mem2_index } from '../modules/bwa_mem2_index.nf'
 
 /**
  * Indexes the user-specified reference file.
@@ -15,11 +15,11 @@ workflow Prepare_References {
     
     main:
         // Run bwa index
-        bwa_index(
+        bwa_mem2_index(
             reference
         )
 
-        ch_referenceFiles = bwa_index.out.referenceFiles
+        ch_referenceFiles = bwa_mem2_index.out.referenceFiles
 
     emit:
         referenceFiles = ch_referenceFiles
