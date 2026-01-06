@@ -1,4 +1,4 @@
-include { bwa_mem2_mem } from '../modules/bwa_mem2.nf'
+include { bwa_mem2_mem } from '../modules/bwa_mem2_mem.nf'
 
 /**
  * Perform quality check on samples by running FASTQC followed by MultiQC.
@@ -12,13 +12,13 @@ include { bwa_mem2_mem } from '../modules/bwa_mem2.nf'
 workflow Align_to_Reference {
     take:
         filteredSamples // channel (required): [ metadata, [ filteredForward, filteredReverse ] ]
-        reference       // file (required): Path to indexed reference genome for alignment
-    
+        referenceFiles  // channel (generated): [ [reference, index1, index2, index3, index4, index5 ] ]
+
     main:
         // Run BWA-mem2 mem
         bwa_mem2_mem(
             filteredSamples,
-            reference
+            referenceFiles
         )
 
         ch_aligned = bwa_mem2_mem.out.alignedSamples

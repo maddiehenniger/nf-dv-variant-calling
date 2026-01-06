@@ -4,8 +4,9 @@
  * Performs adapter trimming and quality filtering on input samples.
  * @see https://github.com/usadellab/Trimmomatic
  * 
- * @input -
- * @emit -
+ * @input samples  - Channel consisting of [ meta, [ forwardPath, reversePath ] ]
+ *        adapters - File path to a FASTA file containing adapter sequences to be removed
+ * @emit trimmed - Channel consisting of [ meta, [ trimmedForward, trimmedReverse ] ]
  */
 
  process run_trimmomatic {

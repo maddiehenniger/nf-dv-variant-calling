@@ -1,24 +1,28 @@
-include { Parse_Samplesheet } from "../subworkflows/parse_samplesheet.nf"
-// include { Quality_Check     } from "../subworkflows/quality_check.nf"
+include { Parse_Samplesheet  } from "../subworkflows/parse_samplesheet.nf"
+include { Prepare_References } from "../subworkflows/prepare_references.nf"
 
 workflow INITIAL_QC {
     take:
         samplesheet
+        reference
 
     main:
+        
+        // Parse input samplesheet
         Parse_Samplesheet(
             samplesheet
         )
 
         ch_samples = Parse_Samplesheet.out.samples
         
-        // Quality_Check(
-        //     ch_samples
-        // )
+        // Prepare reference genome
+        Prepare_References(
+            reference
+        )
 
-        // ch_multiqc_results = Quality_Check.out.multiqc_output
+        ch_referenceFiles = Prepare_References.out.referenceFiles
 
     emit:
-        samples = ch_samples
-        // multiqc_results = ch_multiqc_results
+        samples        = ch_samples
+        referenceFiles = ch_referenceFiles
 }

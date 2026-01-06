@@ -3,12 +3,12 @@ include { Align_to_Reference } from "../subworkflows/align_to_ref.nf"
 workflow ALIGN_AND_PROCESS {
     take:
         filteredSamples
-        reference
+        referenceFiles
 
     main:
         Align_to_Reference(
-            samples,
-            reference
+            filteredSamples,
+            referenceFiles
         )
 
         ch_alignedSamples = Align_to_Reference.out.alignedSamples
