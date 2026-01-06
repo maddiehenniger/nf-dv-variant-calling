@@ -8,13 +8,13 @@
  * @emit -
  */
 
- process bwa_mem2 {
+ process bwa_mem2_mem {
     
     label 'bwa'
 
-    label 'def_cpu'
-    label 'lil_mem'
-    label 'lil_time'
+    label 'big_cpu'
+    label 'big_mem'
+    label 'big_time'
 
     publishDir(
         path:    "${params.publishDirData}/aligned_samples/",
@@ -31,9 +31,9 @@
     script:
         """
         bwa-mem2 mem \
-        -M -t 80 \
-        -R '@RG\tID:${meta.uniqueID}.${meta.laneID}\tSM:${meta.sampleID}\tLB:${meta.libraryID}\tPL:${platformTechnology}' \
+        -M -t ${task.cpus} \
+        -R "@RG\tID:${meta.uniqueID}\tSM:${meta.sampleID}\tLB:${meta.libraryID}\tPL:${platformTechnology}" \
         ${reference} \
-        ${filteredForward} ${filteredReverse} > ${meta.uniqueID}.${meta.laneID}.aln.ARS-UCD1.2_Btau5.0.1Y.sam
+        ${filteredForward} ${filteredReverse} > ${meta.uniqueID}.aln.ARS-UCD1.2_Btau5.0.1Y.sam
         """
  }

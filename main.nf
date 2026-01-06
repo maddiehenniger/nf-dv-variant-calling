@@ -16,6 +16,7 @@ nextflow.enable.dsl=2
 // include custom workflows
 include { INITIAL_QC } from "./workflows/initial_qc.nf"
 include { FILTER_AND_TRIM } from "./workflows/filter_and_trim.nf"
+include { ALIGN_AND_PROCESS } from "./workflows/alignment_and_processing.nf"
 
 workflow {
 
@@ -29,7 +30,7 @@ workflow {
     ch_samples = INITIAL_QC.out.samples
 
     // FILTER_AND_TRIM performs the following:
-    // 1) Runs Trimmomatic v0.40 to remove adapter sequences and filter quality
+    // 1) Runs Trimmomatic to remove adapter sequences and filter quality
 
     FILTER_AND_TRIM(
         ch_samples,
@@ -37,6 +38,15 @@ workflow {
     )
 
     ch_filteredSamples = FILTER_AND_TRIM.out.filteredSamples
-        .view()
+
+    // ALIGN_AND_PROCESS performs the following:
+    // 1) Aligns samples to the user-defined reference genome using bwa-mem2 mem
+
+    ALIGN_AND_PROCESS(
+        ch_filteredSamples,
+        file(params.reference)
+    )
+
+    ch_alignedSamples = ALIGN_AND_PROCESS.out.alignedSamples
 
 }
