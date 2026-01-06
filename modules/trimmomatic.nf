@@ -19,7 +19,7 @@
 
     publishDir(
         path:    "${params.publishDirData}/filtered_files/",
-        mode:    "${params.publishMode}"
+        mode:    'symlink'
     )
 
     input:

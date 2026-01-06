@@ -28,4 +28,10 @@ Before running the pipeline, the `nextflow.config` file must be populated with t
 * `reference`: A file path to the FASTA file containing the appropriate reference genome ending in file extension `.fa`, and currently, requires that associated indexed files are located within the same directory (ex: reference = 'reference.fa')
 * `adapters`: A file path to the FASTA file containing the appropriate adapter sequences to be removed, ending in file extension `.fa`. Please see [the Trimmomatic GitHub](https://github.com/usadellab/Trimmomatic/tree/main/adapters) for guidance on adapter file formatting or curated adapter files (ex: adapters = 'path/to/adapter/sequences/adapters.fa')
 
+## Pipeline overview
 
+The pipeline currently performs the general overall steps:
+* Indexes and prepares the reference genome
+* Adapter trims and quality filters input samples
+* Aligns filtered samples to the reference genome
+* Performs alignment post-processing (sorting, merging, and marking duplicates)

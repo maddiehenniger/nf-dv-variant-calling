@@ -19,7 +19,7 @@
 
     publishDir(
         path:    "${params.publishDirData}/aligned_samples/",
-        mode:    "${params.publishMode}"
+        mode:    'symlink'
     )
 
     input:

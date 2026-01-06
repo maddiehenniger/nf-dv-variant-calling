@@ -1,4 +1,5 @@
 include { samtools_sort  } from '../modules/samtools_sort.nf'
+include { picard_merge_sam_files } from '../modules/picard_mergesamfiles.nf'
 
 /**
  * Sorts the samples aligned to the reference genome, and then used Picard MergeSamFiles to merge. Duplicates are marked using Picard MarkDuplicates. Library-specific BAM files that consist of multiple sequencing libraries per sample are merged and indexed to produce a single BAM file using samtools.
@@ -22,13 +23,15 @@ workflow Process_Aligned_Samples {
         ch_sorted_samples = samtools_sort.out.sortedSamples
 
         // Run Picard MergeSamFiles
-        multiqc_stats(
-            ch_fastqc_output
+        picard_merge_sam_files(
+            ch_sorted_samples
         )
 
-        ch_multiqc_output = multiqc_stats.out.multiqcResults
+        ch_picardMergedBams = picard_merge_sam_files.out.picardMergedBams
+
+        // Run Picard MarkDuplicates
 
     emit:
-        fastqc_output  = ch_fastqc_output
-        multiqc_output = ch_multiqc_output
+        sorted_samples  = ch_sorted_samples
+        picardMergedBams = ch_picardMergedBams
 }

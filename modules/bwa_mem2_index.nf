@@ -12,8 +12,8 @@
     
     label 'bwa'
 
-    label 'med_cpu'
-    label 'med_mem'
+    label 'big_cpu'
+    label 'big_mem'
     label 'def_time'
 
     publishDir(
