@@ -12,17 +12,17 @@
     
     label 'bwa'
 
-    label 'def_cpu'
-    label 'lil_mem'
-    label 'lil_time'
+    label 'med_cpu'
+    label 'med_mem'
+    label 'def_time'
 
     publishDir(
         path:    "${params.publishDirData}/reference_files/",
-        mode:    "symlink"
+        mode:    'symlink'
     )
 
     input:
-        path(reference)
+        path reference
 
     output:
         tuple path(reference), path("*.0123"), path("*.amb"), path("*.ann"), path("*.2bit.64"), path("*.pac"), emit: referenceFiles
@@ -30,7 +30,6 @@
     script:
         """
         bwa-mem2 index \
-        -t ${task.cpus} \
         ${reference}
         """
  }

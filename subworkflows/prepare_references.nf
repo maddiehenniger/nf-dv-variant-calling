@@ -11,7 +11,7 @@ include { bwa_mem2_index } from '../modules/bwa_mem2_index.nf'
 
 workflow Prepare_References {
     take:
-        reference       // file (required): Path to indexed reference genome for alignment
+        reference // file (required): Path to indexed reference genome for alignment
     
     main:
         // Run BWA-mem2 index

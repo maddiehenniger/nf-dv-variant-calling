@@ -24,8 +24,8 @@ workflow {
     // 1a) Reads in the samplesheet and generates raw sample statistics
     // 1b) Reads in the reference and generates indexed files for downstream use
     INITIAL_QC(
-        file(params.samplesheet)       // required: User-provided path to sample metadata identified in the nextflow.config file 
-        file(params.reference)         // required: User-provided path to the reference genome to be used for alignment, as identified in the nextflow.config file
+        file(params.samplesheet),       // required: User-provided path to sample metadata identified in the nextflow.config file 
+        file(params.reference)          // required: User-provided path to the reference genome to be used for alignment, as identified in the nextflow.config file
     )
 
     ch_samples = INITIAL_QC.out.samples
