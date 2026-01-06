@@ -22,11 +22,10 @@
     )
 
     input:
-        tuple val(meta), path(forwardPath), path(reversePath)
         tuple path(zip), path(html)
 
     output:
-        tuple path("*.zip"), path("*.html")
+        path("*.html"), emit: multiqcResults
 
     script:
         """

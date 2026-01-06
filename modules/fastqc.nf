@@ -25,10 +25,10 @@
         tuple val(meta), path(forwardPath), path(reversePath)
 
     output:
-        tuple path("*.zip"), path("*.html")
+        tuple path("*.zip"), path("*.html"), emit: fastqcResults
 
     script:
         """
-        fastqc -t 8 ${forwardPath} ${reversePath}
+        fastqc ${forwardPath} ${reversePath}
         """
  }
