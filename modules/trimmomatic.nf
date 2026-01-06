@@ -13,7 +13,7 @@
     
     label 'trimmomatic'
 
-    label 'med_cpu'
+    label 'big_cpu'
     label 'med_mem'
     label 'med_time'
 
