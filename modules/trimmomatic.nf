@@ -13,7 +13,7 @@
     label 'trimmomatic'
 
     label 'med_cpu'
-    label 'big_mem'
+    label 'med_mem'
     label 'med_time'
 
     publishDir(
@@ -32,6 +32,8 @@
 
     script:
         """
+        export JAVA_OPTS="-Xmx4g"
+
         trimmomatic PE -phred33 -threads 24 \
         -summary ${meta.uniqueID}.TRIM.SUMMARY \
         ${forwardPath} ${reversePath} \
