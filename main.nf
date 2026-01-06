@@ -32,7 +32,7 @@ workflow {
     // 1) Runs Trimmomatic v0.40 to remove adapter sequences and filter quality
 
     FILTER_AND_TRIM(
-        ch_samples
+        ch_samples,
         file(params.adapters)
     )
 

@@ -1,5 +1,4 @@
-include { fastqc_stats  } from '../modules/fastqc.nf'
-include { multiqc_stats } from '../modules/multiqc.nf'
+include { run_trimmomatic } from '../modules/trimmomatic.nf'
 
 /**
  * Perform quality check on samples by running FASTQC followed by MultiQC.
