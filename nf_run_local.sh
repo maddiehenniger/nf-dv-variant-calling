@@ -13,4 +13,4 @@
 
 module load nextflow/23.10.0
 
-nextflow run main.nf -profile condo_trowan1 -plugins nf-schema@2.1.0 -qs 10
+nextflow run main.nf -profile condo_trowan1 -plugins nf-schema@2.1.0 -qs 5

@@ -27,14 +27,14 @@
 
     output:
         tuple val(meta), path("${meta.uniqueID}.1.P.fq"), path("${meta.uniqueID}.2.P.fq"), emit: trimmed
-        path(".TRIM.SUMMARY"), emit: trimmedStats
+        path("*.TRIM.SUMMARY"), emit: trimmedStats
         path("*.U.fq"), emit: unpairedReads
 
     script:
         """
-        export JAVA_OPTS="-Xmx4g"
+        export _JAVA_OPTIONS="-Xmx4g"
 
-        trimmomatic PE -phred33 -threads 24 \
+        trimmomatic PE -phred33 -threads ${task.cpus} \
         -summary ${meta.uniqueID}.TRIM.SUMMARY \
         ${forwardPath} ${reversePath} \
         ${meta.uniqueID}.1.P.fq ${meta.uniqueID}.1.U.fq \
