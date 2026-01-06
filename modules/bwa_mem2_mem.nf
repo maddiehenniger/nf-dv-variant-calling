@@ -11,7 +11,7 @@
 
  process bwa_mem2_mem {
     
-    label 'bwa'
+    label 'bwa-mem2'
 
     label 'big_cpu'
     label 'big_mem'

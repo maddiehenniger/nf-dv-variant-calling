@@ -32,7 +32,7 @@
         export _JAVA_OPTIONS="-Xmx20g"
 
         picard MergeSamFiles I=${sortedBams}\
-        OUTPUT=${meta.sampleID}.merged.bam\
+        OUTPUT=${}.merged.bam\
         USE_THREADING=TRUE MERGE_SEQUENCE_DIRECTORIES=TRUE ASSUME_SORTED=TRUE\
         VALIDATION_STRINGENCY=LENIENT TMP_DIR=${params.publishDirData}/postprocessed_aligned/tmp
         """

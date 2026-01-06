@@ -1,4 +1,4 @@
-include { bwa_mem2_index } from '../modules/bwa_mem2_index.nf'
+include { bwa_index } from '../modules/bwa_index.nf'
 
 /**
  * Indexes the user-specified reference file.
@@ -14,12 +14,12 @@ workflow Prepare_References {
         reference // file (required): Path to indexed reference genome for alignment
     
     main:
-        // Run BWA-mem2 index
-        bwa_mem2_index(
+        // Run bwa index
+        bwa_index(
             reference
         )
 
-        ch_referenceFiles = bwa_mem2_index.out.referenceFiles
+        ch_referenceFiles = bwa_index.out.referenceFiles
 
     emit:
         referenceFiles = ch_referenceFiles
