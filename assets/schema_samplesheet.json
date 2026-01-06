@@ -1,0 +1,60 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "maddiehenniger/nf-dv-variant-calling params.references schema",
+    "description": "Schema for generating sample information for pre-processing and calling variants within maddiehenniger/nf-dv-variant-calling",
+    "type": "array",
+    "items": {
+      "type": "object",
+      "required": ["uniqueID", "sampleID", "laneID", "libraryID", "platformTechnology", "flowCellPixelDistance", "forwardPath", "reversePath"],
+      "properties": {
+        "uniqueID": {
+          "type": "string",
+          "pattern": "^\\S+$",
+          "errorMessage": "A user-provided unique ID for each input file must be provided and cannot contain spaces.",
+          "meta": "uniqueID"
+        },
+        "sampleID": {
+          "type": "string",
+          "pattern": "^\\S+$",
+          "errorMessage": "A user-provided sample ID must be provided and cannot contain spaces. The sample ID does not need to be unique per input file.",
+          "meta": "sampleID"
+        },
+        "laneID": {
+            "type": "string",
+            "pattern": "^\\S+$",
+            "errorMessage": "An identifier for the lane should be provided and cannot contain spaces.",
+            "meta": "laneID"
+          },
+        "libraryID": {
+          "type": "string",
+          "pattern": "^\\S+$",
+          "errorMessage": "A DNA preparation library identifier should be provided and cannot contain spaces.",
+          "meta": "libraryID"
+        },
+        "platformTechnology": {
+            "type": "string",
+            "pattern": "^\\S+$",
+            "errorMessage": "The sequencing platform used to generate data must be provided and cannot contain spaces. Valid values as limited by GATK include: ILLUMINA, SOLID, LS454, HELICOS, and PACBIO.",
+            "enum": [ "ILLUMINA", "SOLID", "LS454", "HELICOS", "PACBIO" ],
+            "meta": "platformTechnology"
+          },
+          "flowCellPixelDistance": {
+            "type": "integer",
+            "errorMessage": "A numeric value in the form of an integer must be provided. The value must be the appropriate optical pixel distance for traditional flow cells (100) or patterned flow cells (2500) based on the source of the data.",
+            "meta": "pixel"
+          },
+        "forwardPath": {
+          "type": "string",
+          "pattern": "^\\S+$",
+          "format": "file-path",
+          "errorMessage": "A FASTQ(.gz) file path to the forward reads for the associated sample must be provided, cannot contain spaces, and must have an file extension including '.fastq' or '.fastq.gz'."
+        },
+        "reversePath": {
+            "type": "string",
+            "pattern": "^\\S+$",
+            "format": "file-path",
+            "errorMessage": "A FASTQ(.gz) file path to the reverse reads for the associated sample must be provided, cannot contain spaces, and must have an file extension including '.fastq' or '.fastq.gz'."
+          }
+      }
+    }
+  }
