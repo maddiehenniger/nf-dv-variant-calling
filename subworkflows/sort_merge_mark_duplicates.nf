@@ -39,7 +39,6 @@ workflow Process_Aligned_Samples {
 
         // Run samtools merge
 
-
     emit:
         sorted_samples  = ch_sorted_samples
         picardMergedBam = ch_picardMergedBam

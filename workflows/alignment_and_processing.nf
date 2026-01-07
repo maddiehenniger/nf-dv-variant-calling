@@ -13,7 +13,13 @@ workflow ALIGN_AND_PROCESS {
 
         ch_alignedSamples = Align_to_Reference.out.alignedSamples
 
+        Process_Aligned_Samples(
+            ch_alignedSamples
+        )
+
+        ch_picard_marked_duplicates = Process_Aligned_Samples.out.picardMarkedDuplicates
 
     emit:
         alignedSamples = ch_alignedSamples
+        markedDuplicates = ch_picard_marked_duplicates
 }
