@@ -13,13 +13,13 @@
     
     label 'bwa_mem2'
 
-    label 'big_cpu'
-    label 'big_mem'
+    label 'huge_cpu'
+    label 'huge_mem'
     label 'big_time'
 
     publishDir(
         path:    "${params.publishDirData}/aligned_samples/",
-        mode:    'symlink'
+        mode:    "symlink"
     )
 
     input:
@@ -31,9 +31,8 @@
 
     script:
         """
-        bwa-mem2 mem \
-        -M -t ${task.cpus} \
-        -R "@RG\tID:${meta.uniqueID}\tSM:${meta.sampleID}\tLB:${meta.libraryID}\tPL:${platformTechnology}" \
+        bwa-mem2 mem -M -t ${task.cpus} \
+        -R "@RG\\tID:${meta.uniqueID}\\tSM:${meta.sampleID}\\tLB:${meta.libraryID}\\tPL:${meta.platformTechnology}" \
         ${reference} \
         ${filteredForward} ${filteredReverse} > ${meta.uniqueID}.aln.${reference.baseName}.sam
         """
