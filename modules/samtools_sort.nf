@@ -13,7 +13,7 @@
     label 'samtools'
 
     label 'lil_cpu'
-    label 'dynamic_mem'
+    label 'huge_mem'
     label 'med_time'
 
     publishDir(
