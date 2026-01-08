@@ -21,7 +21,20 @@ workflow Process_Aligned_Samples {
             alignedSamples
         )
 
-        ch_sorted_samples = samtools_sort.out.sortedSamples
+        // Take the samtools sort output and restructure the metadata for samples with multiple sequencing libraries
+        ch_sorted_samples = samtools_sort.out.sortedBams
+            .map { meta, sortedBams ->
+                def picard_meta = [
+                    sampleID: meta.sampleID,
+                    libraryID: meta.libraryID,
+                    pixel: meta.pixel,
+                    platformTechnology: platformTechnology,
+                    id: '${meta.sampleID_${meta.libraryID}'
+                ]
+                return [ picard_meta, sortedBams ]
+            }
+        // Now group by the new index to collect samples together by library
+        .groupTuple(by: 0)
 
         // Run Picard MergeSamFiles
         picard_merge_sam_files(
@@ -41,6 +54,6 @@ workflow Process_Aligned_Samples {
 
     emit:
         sorted_samples  = ch_sorted_samples
-        picardMergedBam = ch_picardMergedBam
-        picardMarkedDuplicates = ch_picardMarkedDuplicates
+        picardMergedBam = ch_picard_merged_bams
+        picardMarkedDuplicates = ch_picard_marked_duplicates
 }

@@ -12,9 +12,9 @@
     
     label 'samtools'
 
-    label 'def_cpu'
-    label 'lil_mem'
-    label 'lil_time'
+    label 'lil_cpu'
+    label 'dynamic_mem'
+    label 'med_time'
 
     publishDir(
         path:    "${params.publishDirData}/sorted_samples/",
@@ -29,9 +29,10 @@
 
     script:
         """
-        samtools sort -m ${task.mem} \
+        samtools sort -m ${task.memory.giga}G \
         -@ ${task.cpus} \
         -o ${meta.uniqueID}.sorted.bam \
+        -T ${alignedSamples.baseName}.TMP \
         ${alignedSamples}
         """
  }

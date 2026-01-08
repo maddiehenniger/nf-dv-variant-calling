@@ -25,15 +25,15 @@
         tuple val(meta), path(picardMergedBams)
 
     output:
-        tuple val(meta), path("*.merged.bam"), emit: picardMarkedDuplicates
+        tuple val(meta), path("${meta.id}.sorted.picard.merged.marked.bam"), emit: picardMarkedDuplicates
 
     script:
     """
     export _JAVA_OPTIONS="-Xmx50g"
 
     picard MarkDuplicates I=${picardMergedBams} \
-    O=${meta.sampleID}.sorted.picard.merged.marked.bam \
-    -METRICS_FILE ${meta.sampleID}.DUP.METRICS -MAX_RECORDS_IN_RAM 5000000 \
+    O=${meta.id}.sorted.picard.merged.marked.bam \
+    -METRICS_FILE ${meta.id}.DUP.METRICS -MAX_RECORDS_IN_RAM 5000000 \
     -MAX_FILE_HANDLES_FOR_READ_ENDS_MAP 1000 -ASSUME_SORTED TRUE \
     -VALIDATION_STRINGENCY LENIENT -TMP_DIR ${params.publishDirData}/postprocessed_aligned/tmp \
     -OPTICAL_DUPLICATE_PIXEL_DISTANCE ${meta.pixel} -COMPRESSION_LEVEL 0

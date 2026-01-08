@@ -1,4 +1,5 @@
 include { Align_to_Reference } from "../subworkflows/align_to_ref.nf"
+include { Process_Aligned_Samples } from "../subworkflows/sort_merge_mark_duplicates.nf"
 
 workflow ALIGN_AND_PROCESS {
     take:

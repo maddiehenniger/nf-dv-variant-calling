@@ -13,7 +13,7 @@
     label 'bwa_mem2'
 
     label 'big_cpu'
-    label 'max_mem'
+    label 'dynamic_mem'
     label 'def_time'
 
     publishDir(
