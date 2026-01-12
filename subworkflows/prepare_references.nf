@@ -18,7 +18,7 @@ workflow Prepare_References {
         def ref_file = file(params.reference)
         
         // Define the required BWA-MEM2 index suffixes
-        def index_suffices = ['.0123','.amb','.ann','.bwt.2bit.64','.pac']
+        def index_suffixes = ['.0123','.amb','.ann','.bwt.2bit.64','.pac']
 
         // This assumes indexes look like: ref.fa.amb, ref.fa.ann, etc.
         def expected_indices = index_suffixes.collect { suffix -> 
@@ -26,6 +26,8 @@ workflow Prepare_References {
         }
 
         // Check if the reference exists and if all indxed files are located within the same directory as the reference
+        def indices_exist = expected_indices.every { it.exists() }
+
         if (indices_exist) {
             log.info "Found existing BWA-MEM2 indices, skipping indexing."
             // Create a channel with the reference and the existing indices
