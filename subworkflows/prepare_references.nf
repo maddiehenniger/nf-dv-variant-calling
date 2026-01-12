@@ -1,7 +1,7 @@
 include { bwa_mem2_index } from '../modules/bwa_mem2_index.nf'
 
 /**
- * Indexes the user-specified reference file.
+ * Indexes the user-specified reference file, or identifies if indices already exist.
  * 
  * Outputs the indexed reference files required by BWA to perform downstream sample alignment. 
  *
@@ -14,12 +14,32 @@ workflow Prepare_References {
         reference // file (required): Path to indexed reference genome for alignment
     
     main:
-        // Run bwa index
-        bwa_mem2_index(
-            reference
-        )
+        // Identify the reference file object
+        def ref_file = file(params.reference)
+        
+        // Define the required BWA-MEM2 index suffixes
+        def index_suffices = ['.0123','.amb','.ann','.bwt.2bit.64','.pac']
 
-        ch_referenceFiles = bwa_mem2_index.out.referenceFiles
+        // This assumes indexes look like: ref.fa.amb, ref.fa.ann, etc.
+        def expected_indices = index_suffixes.collect { suffix -> 
+            file("${ref_file}${suffix}") 
+        }
+
+        // Check if the reference exists and if all indxed files are located within the same directory as the reference
+        if (indices_exist) {
+            log.info "Found existing BWA-MEM2 indices, skipping indexing."
+            // Create a channel with the reference and the existing indices
+            ch_referenceFiles = Channel.of([reference, expected_indices])
+        } else {
+            log.info "Indices not found. Starting indexing process. This is a highly memory-intensive task."
+            // Run bwa index
+            bwa_mem2_index(
+                reference
+            )
+            // Create channel with the reference and generated indices
+            ch_referenceFiles = bwa_mem2_index.out.referenceFiles
+
+        }
 
     emit:
         referenceFiles = ch_referenceFiles

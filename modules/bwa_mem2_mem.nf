@@ -14,7 +14,7 @@
     label 'bwa_mem2'
 
     label 'huge_cpu'
-    label 'dynamic_mem'
+    label 'sup_mem'
     label 'big_time'
 
     publishDir(
