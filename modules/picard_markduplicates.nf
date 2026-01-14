@@ -12,8 +12,8 @@
     
     label 'picard'
 
-    label 'med_cpu'
-    label 'big_mem'
+    label 'def_cpu'
+    label 'huge_mem'
     label 'big_time'
 
     publishDir(
@@ -31,8 +31,8 @@
     """
     export _JAVA_OPTIONS="-Xmx50g"
 
-    picard MarkDuplicates I=${picardMergedBams} \
-    O=${meta.id}.sorted.picard.merged.marked.bam \
+    picard MarkDuplicates -INPUT ${picardMergedBams} \
+    -OUTPUT ${meta.id}.sorted.picard.merged.marked.bam \
     -METRICS_FILE ${meta.id}.DUP.METRICS -MAX_RECORDS_IN_RAM 5000000 \
     -MAX_FILE_HANDLES_FOR_READ_ENDS_MAP 1000 -ASSUME_SORTED TRUE \
     -VALIDATION_STRINGENCY LENIENT -TMP_DIR ${params.publishDirData}/postprocessed_aligned/tmp \

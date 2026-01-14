@@ -12,8 +12,8 @@
     
     label 'samtools'
 
-    label 'lil_cpu'
-    label 'huge_mem'
+    label 'def_cpu'
+    label 'lil_mem'
     label 'med_time'
 
     publishDir(
@@ -29,7 +29,7 @@
 
     script:
         """
-        samtools sort -m ${task.memory.giga}G \
+        samtools sort \
         -@ ${task.cpus} \
         -o ${meta.uniqueID}.sorted.bam \
         -T ${alignedSamples.baseName}.TMP \

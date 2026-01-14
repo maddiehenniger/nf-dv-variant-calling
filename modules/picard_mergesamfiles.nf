@@ -13,8 +13,8 @@
 
     label 'picard'
 
-    label 'med_cpu'
-    label 'dynamic_mem'
+    label 'def_cpu'
+    label 'huge_mem'
     label 'big_time'
 
     publishDir(
@@ -37,7 +37,7 @@
 
     picard MergeSamFiles ${inputBams} \
     OUTPUT=${meta.id}.sorted.picard.merged.bam \
-    USE_THREADING=TRUE MERGE_SEQUENCE_DIRECTORIES=TRUE ASSUME_SORTED=TRUE \
+    USE_THREADING=TRUE MERGE_SEQUENCE_DICTIONARIES=TRUE ASSUME_SORTED=TRUE \
     VALIDATION_STRINGENCY=LENIENT TMP_DIR=${params.publishDirData}/postprocessed_aligned/tmp
      """
  }

@@ -18,7 +18,7 @@ workflow Align_to_Reference {
         // Run BWA-mem2 mem
         bwa_mem2_mem(
             filteredSamples,
-            referenceFiles
+            referenceFiles.first()
         )
 
         ch_aligned = bwa_mem2_mem.out.alignedSamples

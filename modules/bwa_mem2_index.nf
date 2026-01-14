@@ -25,7 +25,7 @@
         path reference
 
     output:
-        tuple path(reference), path("*.0123"), path("*.amb"), path("*.ann"), path("*.2bit.64"), path("*.pac"), emit: referenceFiles
+        tuple path(reference), path("${reference}.{0123,amb,ann,bwt.2bit.64,pac}"), emit: referenceFiles
 
     script:
         """

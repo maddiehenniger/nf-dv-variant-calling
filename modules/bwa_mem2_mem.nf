@@ -24,7 +24,7 @@
 
     input:
         tuple val(meta), path(filteredForward), path(filteredReverse)
-        tuple path(reference), path(index1), path(index2), path(index3), path(index4), path(index5)
+        tuple path(reference), path(indices)
 
     output:
         tuple val(meta), path("*sam"), emit: alignedSamples

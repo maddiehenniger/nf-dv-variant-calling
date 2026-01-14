@@ -29,7 +29,7 @@ workflow Process_Aligned_Samples {
                     libraryID: meta.libraryID,
                     pixel: meta.pixel,
                     platformTechnology: meta.platformTechnology,
-                    id: '${meta.sampleID_${meta.libraryID}'
+                    id: "${meta.sampleID}_${meta.libraryID}"
                 ]
                 return [ picard_meta, sortedBams ]
             }
