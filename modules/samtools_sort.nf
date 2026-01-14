@@ -18,7 +18,7 @@
 
     publishDir(
         path:    "${params.publishDirData}/sorted_samples/",
-        mode:    "${params.publishMode}"
+        mode:    "symlink"
     )
 
     input:

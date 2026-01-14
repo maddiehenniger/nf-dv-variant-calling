@@ -18,7 +18,7 @@
 
     publishDir(
         path:    "${params.publishDirData}/postprocessed_aligned/",
-        mode:    'symlink'
+        mode:    'copy'
     )
 
     input:
