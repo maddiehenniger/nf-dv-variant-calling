@@ -14,7 +14,7 @@
     label 'picard'
 
     label 'def_cpu'
-    label 'huge_mem'
+    label 'sup_mem'
     label 'big_time'
 
     publishDir(
