@@ -13,12 +13,12 @@
     label 'picard'
 
     label 'def_cpu'
-    label 'huge_mem'
+    label 'max_mem'
     label 'big_time'
 
     publishDir(
         path:    "${params.publishDirData}/postprocessed_aligned/",
-        mode:    'copy'
+        mode:    'symlink'
     )
 
     input:
@@ -29,7 +29,7 @@
 
     script:
     """
-    export _JAVA_OPTIONS="-Xmx50g"
+    export _JAVA_OPTIONS="-Xmx80G"
 
     picard MarkDuplicates -INPUT ${picardMergedBams} \
     -OUTPUT ${meta.id}.sorted.picard.merged.marked.bam \

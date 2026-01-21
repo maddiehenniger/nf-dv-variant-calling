@@ -48,7 +48,7 @@ workflow {
     )
 
     ch_alignedSamples = ALIGN_AND_PROCESS.out.alignedSamples
-    ch_markedDuplicates = ALIGN_AND_PROCESS.out.markedDuplicates
+    ch_indexedSamples = ALIGN_AND_PROCESS.out.indexedSamples
         .view()
 
 }

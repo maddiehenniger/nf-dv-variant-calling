@@ -18,9 +18,11 @@ workflow ALIGN_AND_PROCESS {
             ch_alignedSamples
         )
 
-        ch_picard_marked_duplicates = Process_Aligned_Samples.out.picardMarkedDuplicates
+        ch_indexed_samples = Process_Aligned_Samples.out.indexedSamples
 
     emit:
         alignedSamples = ch_alignedSamples
-        markedDuplicates = ch_picard_marked_duplicates
+        // markedDuplicates = ch_picard_marked_duplicates
+        mergedSamples = Process_Aligned_Samples.out.mergedBams
+        indexedSamples = ch_indexed_samples
 }
