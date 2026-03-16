@@ -25,7 +25,7 @@
         tuple val(meta), path(mergedSamples)
 
     output:
-        tuple val(meta), path("*.{bam,.bam.bai}"), emit: indexedSamples
+        tuple val(meta), path("*bai"), emit: indexedSamples
 
     script:
         """
